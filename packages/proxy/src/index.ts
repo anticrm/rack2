@@ -54,7 +54,7 @@ export default (): Service => {
   });
 
   const redir = require('redirect-https')()
-  require('http').createServer(greenlock.middleware(redir)).listen(80);
+  require('http').createServer(greenlock.httpMiddleware(redir)).listen(80);
    
   require('https').createServer(greenlock.tlsOptions, function (req: any, res: any) {
     res.end('rack proxy alive');
