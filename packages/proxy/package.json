@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "dockerode": "^3.2.1",
-    "http-proxy": "^1.18.1"
+    "http-proxy": "^1.18.1",
+    "redirect-https": "^1.3.1"
   }
 }
