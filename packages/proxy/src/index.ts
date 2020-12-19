@@ -19,6 +19,7 @@ import { join } from 'path'
 
 const pkg = require('../package.json')
 const Greenlock = require('greenlock')
+const Servers = require('./servers.js')
 
 export default (): Service => {
 
@@ -48,17 +49,12 @@ export default (): Service => {
       console.log('config', fullConfig)
     })
 
+  const servers = Servers.create(greenlock)
+
   greenlock.add({
     subject: 'api.screenversation.com',
     altnames: ['api.screenversation.com']
   });
-
-  const redir = require('redirect-https')()
-  require('http').createServer(greenlock.httpMiddleware(redir)).listen(80);
-   
-  require('https').createServer(greenlock.tlsOptions, function (req: any, res: any) {
-    res.end('rack proxy alive');
-  }).listen(443);  
 
   return {
     name: pkg.name,
